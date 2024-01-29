@@ -76,6 +76,7 @@ BEGIN
     REPEAT
       Out.String(name); Out.Char("["); Out.Int(i, 0); Out.String("]='");
       Out.String(pstrs^[i]^); Out.String("'"); Out.Ln;
+      INC(i);
     UNTIL i = LEN(pstrs^);
     Out.String("------------------------------"); Out.Ln;
   ELSE
