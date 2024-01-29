@@ -16,6 +16,9 @@ CONST
   nzr   = "🧿";
   print = "🖨";
 
+VAR
+  debug: BOOLEAN;
+
 PROCEDURE msg*(VAR msg: ARRAY OF CHAR);
 BEGIN
   Out.String(ntl); Out.String(msg); Out.Ln;
@@ -45,5 +48,11 @@ BEGIN
   Out.Ln
 END prnInt;
 
+PROCEDURE setDebug*(state: BOOLEAN);
+BEGIN
+  debug := state
+END setDebug;
 
+BEGIN
+  debug := FALSE;
 END dbg.
