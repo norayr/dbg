@@ -22,17 +22,17 @@ VAR
 
 (* messages *)
 
-PROCEDURE msg*(VAR msg: ARRAY OF CHAR);
+PROCEDURE msg*(msg: ARRAY OF CHAR);
 BEGIN
   Out.String(ntl); Out.String(msg); Out.Ln;
 END msg;
 
-PROCEDURE notmsg*(VAR msg: ARRAY OF CHAR);
+PROCEDURE notmsg*(msg: ARRAY OF CHAR);
 BEGIN
   Out.String(not); Out.String(msg); Out.Ln
 END notmsg;
 
-PROCEDURE yaymsg*(VAR msg: ARRAY OF CHAR);
+PROCEDURE yaymsg*(msg: ARRAY OF CHAR);
 BEGIN
   Out.String(yay); Out.String(msg); Out.Ln;
 END yaymsg;
@@ -65,7 +65,7 @@ BEGIN
   END
 END prnBool;
 
-PROCEDURE prnPstrings*(VAR name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
+PROCEDURE prnPstrings*(name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
 VAR
   i: INTEGER;
 BEGIN
