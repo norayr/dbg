@@ -15,7 +15,7 @@ CONST
   true  = "⊨ ";
   nzr   = "🧿";
   wrn   = "⚠ ";
-  print = "🖨";
+  print = "🖨 ";
 
 VAR
   debug: BOOLEAN;
