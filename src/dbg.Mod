@@ -52,7 +52,8 @@ PROCEDURE prnBool*(name: ARRAY OF CHAR; b: BOOLEAN);
 BEGIN
   Out.String("variable "); Out.String(name); Out.String ("='");
   IF b THEN Out.String("TRUE") ELSE Out.String("FALSE"); Out.Char("'");
-  Out.Ln
+    Out.Ln
+  END
 END prnBool;
 
 PROCEDURE prnPstrings*(VAR name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
