@@ -8,7 +8,7 @@ CONST
   not* = "¬ ";
   yay* = "✓ ";
 
-  enter = "⎆ " ;
+  entr  = "⎆ " ;
   exit  = "⎘ ";
   over  = "⁂ " ;
   loop  = "➰";
@@ -47,6 +47,11 @@ BEGIN
   Out.Int(int, 0); Out.Char("'");
   Out.Ln
 END prnInt;
+
+PROCEDURE enter*(name: ARRAY OF CHAR);
+BEGIN
+  Out.String(entr); Out.String(name); Out.Ln
+END enter;
 
 PROCEDURE setDebug*(state: BOOLEAN);
 BEGIN
