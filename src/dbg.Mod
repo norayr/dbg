@@ -91,10 +91,10 @@ BEGIN
   Out.String(entr); Out.String(name); Out.String("()"); Out.Ln
 END enter;
 
-PROCEDURE entLoop*(msg: ARRAY OF CHAR);
+PROCEDURE enterLoop*(msg: ARRAY OF CHAR);
 BEGIN
   Out.String(loop); Out.String(msg); Out.Ln
-END entLoop;
+END enterLoop;
 
 PROCEDURE exitLoop*(msg: ARRAY OF CHAR);
 BEGIN
