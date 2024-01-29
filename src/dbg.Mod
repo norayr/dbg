@@ -1,5 +1,5 @@
 MODULE dbg;
-IMPORT Out;
+IMPORT Out, strTypes, strUtils;
 
 CONST
   qst* = "՞ ";
@@ -48,9 +48,29 @@ BEGIN
   Out.Ln
 END prnInt;
 
+PROCEDURE prnBool*(name: ARRAY OF CHAR; b: BOOLEAN);
+BEGIN
+  Out.String("variable "); Out.String(name); Out.String ("='");
+  IF b THEN Out.String("TRUE") ELSE Out.String("FALSE"); Out.Char("'");
+  Out.Ln
+END prnBool;
+
+PROCEDURE prnPstrings(VAR name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
+VAR
+  i: INTEGER;
+BEGIN
+i := 0;
+  Out.String("------------------------------"); Out.Ln;
+  REPEAT
+    Out.String(name); Out.Char("["); Out.Int(i, 0); Out.String("]='");
+    Out.String(pstrs^[i]^); Out.String("'"); Out.Ln;
+  UNTIL i = LEN(pstrs^);
+  Out.String("------------------------------"); Out.Ln;
+END prnPstrings;
+
 PROCEDURE enter*(name: ARRAY OF CHAR);
 BEGIN
-  Out.String(entr); Out.String(name); Out.Ln
+  Out.String(entr); Out.String(name); Out.String("()"); Out.Ln
 END enter;
 
 PROCEDURE setDebug*(state: BOOLEAN);
