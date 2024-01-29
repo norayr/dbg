@@ -43,7 +43,7 @@ END yaymsg;
 PROCEDURE prnStr*(name: ARRAY OF CHAR; str: ARRAY OF CHAR);
 BEGIN
   Out.String(print);
-  Out.String("variable "); Out.String(name); Out.String ("='");
+  Out.String(name); Out.String ("='");
   Out.String(str); Out.Char("'");
   Out.Ln
 END prnStr;
@@ -51,7 +51,7 @@ END prnStr;
 PROCEDURE prnInt*(name: ARRAY OF CHAR; int: LONGINT);
 BEGIN
   Out.String(print);
-  Out.String("variable "); Out.String(name); Out.String ("='");
+  Out.String(name); Out.String ("='");
   Out.Int(int, 0); Out.Char("'");
   Out.Ln
 END prnInt;
