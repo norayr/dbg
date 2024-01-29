@@ -20,6 +20,8 @@ CONST
 VAR
   debug: BOOLEAN;
 
+(* messages *)
+
 PROCEDURE msg*(VAR msg: ARRAY OF CHAR);
 BEGIN
   Out.String(ntl); Out.String(msg); Out.Ln;
@@ -34,6 +36,9 @@ PROCEDURE yaymsg*(VAR msg: ARRAY OF CHAR);
 BEGIN
   Out.String(yay); Out.String(msg); Out.Ln;
 END yaymsg;
+
+
+(* print vairables*)
 
 PROCEDURE prnStr*(name: ARRAY OF CHAR; str: ARRAY OF CHAR);
 BEGIN
@@ -78,10 +83,27 @@ BEGIN
   END
 END prnPstrings;
 
+
+(* structure *)
+
 PROCEDURE enter*(name: ARRAY OF CHAR);
 BEGIN
   Out.String(entr); Out.String(name); Out.String("()"); Out.Ln
 END enter;
+
+PROCEDURE loop*(msg: ARRAY OF CHAR);
+BEGIN
+  Out.String(loop); Out.String(msg) Out.Ln
+END enter;
+
+PROCEDURE compStrs*(strs0, strs1: ARRAY OF CHAR);
+BEGIN
+  Out.String(qst);
+  Out.String("comparing '"); Out.String(sts0); Out.String("' with '");
+  Out.String(strs1); Out.Char("'"); Out.Ln
+END enter;
+
+(* set debug on or off *)
 
 PROCEDURE setDebug*(state: BOOLEAN);
 BEGIN
