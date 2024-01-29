@@ -14,6 +14,7 @@ CONST
   loop  = "➰";
   true  = "⊨ ";
   nzr   = "🧿";
+  wrn   = "⚠ ";
   print = "🖨";
 
 VAR
@@ -36,6 +37,7 @@ END yaymsg;
 
 PROCEDURE prnStr*(name: ARRAY OF CHAR; str: ARRAY OF CHAR);
 BEGIN
+  Out.String(print);
   Out.String("variable "); Out.String(name); Out.String ("='");
   Out.String(str); Out.Char("'");
   Out.Ln
@@ -43,6 +45,7 @@ END prnStr;
 
 PROCEDURE prnInt*(name: ARRAY OF CHAR; int: LONGINT);
 BEGIN
+  Out.String(print);
   Out.String("variable "); Out.String(name); Out.String ("='");
   Out.Int(int, 0); Out.Char("'");
   Out.Ln
@@ -50,6 +53,7 @@ END prnInt;
 
 PROCEDURE prnBool*(name: ARRAY OF CHAR; b: BOOLEAN);
 BEGIN
+  Out.String(print);
   Out.String("variable "); Out.String(name); Out.String ("='");
   IF b THEN Out.String("TRUE") ELSE Out.String("FALSE"); Out.Char("'");
     Out.Ln
@@ -60,13 +64,18 @@ PROCEDURE prnPstrings*(VAR name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
 VAR
   i: INTEGER;
 BEGIN
-i := 0;
-  Out.String("------------------------------"); Out.Ln;
-  REPEAT
-    Out.String(name); Out.Char("["); Out.Int(i, 0); Out.String("]='");
-    Out.String(pstrs^[i]^); Out.String("'"); Out.Ln;
-  UNTIL i = LEN(pstrs^);
-  Out.String("------------------------------"); Out.Ln;
+  Out.String(print);
+  IF pstrs # NIL THEN
+    i := 0;
+    Out.String("------------------------------"); Out.Ln;
+    REPEAT
+      Out.String(name); Out.Char("["); Out.Int(i, 0); Out.String("]='");
+      Out.String(pstrs^[i]^); Out.String("'"); Out.Ln;
+    UNTIL i = LEN(pstrs^);
+    Out.String("------------------------------"); Out.Ln;
+  ELSE
+    Out.String(wrn); Out.String(name); Out.String(" is NIL"); Out.Ln
+  END
 END prnPstrings;
 
 PROCEDURE enter*(name: ARRAY OF CHAR);
