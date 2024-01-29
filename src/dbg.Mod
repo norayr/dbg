@@ -55,7 +55,7 @@ BEGIN
   Out.Ln
 END prnBool;
 
-PROCEDURE prnPstrings(VAR name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
+PROCEDURE prnPstrings*(VAR name: ARRAY OF CHAR; VAR pstrs: strTypes.pstrings);
 VAR
   i: INTEGER;
 BEGIN
