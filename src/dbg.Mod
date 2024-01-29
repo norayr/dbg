@@ -91,17 +91,23 @@ BEGIN
   Out.String(entr); Out.String(name); Out.String("()"); Out.Ln
 END enter;
 
-PROCEDURE loop*(msg: ARRAY OF CHAR);
+PROCEDURE entLoop*(msg: ARRAY OF CHAR);
 BEGIN
-  Out.String(loop); Out.String(msg) Out.Ln
-END enter;
+  Out.String(loop); Out.String(msg); Out.Ln
+END entLoop;
+
+PROCEDURE exitLoop*(msg: ARRAY OF CHAR);
+BEGIN
+  Out.String(exit); Out.String(msg); Out.Ln
+END exitLoop;
 
 PROCEDURE compStrs*(strs0, strs1: ARRAY OF CHAR);
 BEGIN
   Out.String(qst);
-  Out.String("comparing '"); Out.String(sts0); Out.String("' with '");
-  Out.String(strs1); Out.Char("'"); Out.Ln
-END enter;
+  Out.String("comparing '");
+  Out.String(strs0); Out.String("' with '"); Out.String(strs1); Out.Char("'");
+  Out.Ln
+END compStrs;
 
 (* set debug on or off *)
 
