@@ -3,53 +3,52 @@ DEPEND = github.com/norayr/strutils
 VOC = /opt/voc/bin/voc
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir_path := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-BUILD := build
-DPS := deps
-DEPS_PATH := $(mkfile_dir_path)/$(DPS)
-BUILD_PATH := $(mkfile_dir_path)/$(BUILD)
-
-# Function to transform GitHub repository URLs to local directory paths
-define dep_path
-$(DEPS_PATH)/$(1)
-endef
-
-# Targets for dependency management
-.PHONY: all get_deps build_deps build_this clean
-
-all: get_deps build_deps build_this
+$(info $$mkfile_path is [${mkfile_path}])
+$(info $$mkfile_dir_path is [${mkfile_dir_path}])
+ifndef BUILD
+BUILD="build"
+endif
+build_dir_path := $(mkfile_dir_path)/$(BUILD)
+current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+BLD := $(mkfile_dir_path)/build
+DPD  =  deps
+ifndef DPS
+DPS := $(mkfile_dir_path)/$(DPD)
+endif
+all: get_deps build_deps buildThis
 
 get_deps:
-	@echo "Fetching and updating dependencies..."
-	@mkdir -p $(DEPS_PATH)
-	@for dep in $(DEPEND); do \
-		dep_dir="$(call dep_path,$$dep)"; \
-		if [ ! -d "$$dep_dir" ]; then \
-			git clone "https://$$dep.git" "$$dep_dir"; \
-		else \
-			(cd "$$dep_dir" && git pull); \
-		fi; \
+	@for i in $(DEPEND); do \
+			if [ -d "$(DPS)/$${i}" ]; then \
+				 cd "$(DPS)/$${i}"; \
+				 git pull; \
+				 cd - ;    \
+				 else \
+				 mkdir -p "$(DPS)/$${i}"; \
+				 cd "$(DPS)/$${i}"; \
+				 cd .. ; \
+				 git clone "https://$${i}"; \
+				 cd - ; \
+			fi; \
 	done
 
 build_deps:
-	@echo "Building dependencies..."
-	@mkdir -p $(BUILD_PATH)
-	@for dep in $(DEPEND); do \
-		dep_dir="$(call dep_path,$$dep)"; \
-		if [ -f "$$dep_dir/GNUmakefile" ] || [ -f "$$dep_dir/Makefile" ]; then \
-			$(MAKE) -C "$$dep_dir" -f "$${dep_dir}/GNUmakefile" BUILD=$(BUILD_PATH) || \
-			$(MAKE) -C "$$dep_dir" -f "$${dep_dir}/Makefile" BUILD=$(BUILD_PATH); \
+	mkdir -p $(BLD)
+	cd $(BLD); \
+	for i in $(DEPEND); do \
+		if [ -f "$(DPS)/$${i}/GNUmakefile" ]; then \
+			make -f "$(DPS)/$${i}/GNUmakefile" BUILD=$(BLD); \
+		else \
+			make -f "$(DPS)/$${i}/Makefile" BUILD=$(BLD); \
 		fi; \
 	done
 
-build_this:
-	@echo "Building this project..."
-	cd $(BUILD_PATH) && $(VOC) -s $(mkfile_dir_path)/src/dbg.Mod
+buildThis:
+	cd $(BUILD) && $(VOC) -s $(mkfile_dir_path)/src/dbg.Mod
 
 tests:
-	cd $(BUILD_PATH) && $(VOC) $(mkfile_dir_path)/src/irctest.Mod -m
+	#cd $(BUILD) && $(VOC) $(mkfile_dir_path)/src/irctest.Mod -m
 	#build/testList
 
 clean:
-	@echo "Cleaning build directory..."
-	@rm -rf $(BUILD_PATH)
-
+	if [ -d "$(BUILD)" ]; then rm -rf $(BLD); fi
